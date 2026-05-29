@@ -1,0 +1,26 @@
+# Atlas Apparel CRM — systemd service unit
+# Unit 6 criterion: C.P6 (runs as a managed service that survives reboots)
+#
+# Install to: /etc/systemd/system/atlas-crm.service
+# Then:  sudo systemctl daemon-reload
+#        sudo systemctl enable --now atlas-crm
+#        sudo systemctl status atlas-crm
+#
+# Assumes the repo is at /home/ubuntu/atlas-crm and `npm run build` has been run.
+
+[Unit]
+Description=Atlas Apparel Wholesale CRM (Next.js)
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/atlas-crm
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStart=/usr/bin/npm run start
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,25 @@
+name: Deploy to EC2
+
+# Unit 6 criterion: D.P8 — continuous deployment.
+# Manual trigger (workflow_dispatch) so the Actions tab stays green until you've
+# added the secrets below. SSHes into the EC2 host and runs deploy/deploy.sh.
+#
+# Required repository secrets (Settings → Secrets and variables → Actions):
+#   EC2_HOST      public IP / DNS of the instance
+#   EC2_USER      ssh user (e.g. ubuntu)
+#   EC2_SSH_KEY   the private key matching the instance's key pair
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: bash /home/ubuntu/atlas-crm/deploy/deploy.sh
