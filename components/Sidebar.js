@@ -34,7 +34,7 @@ function Brand() {
         <Shirt className="h-5 w-5 text-white" />
       </div>
       <div className="leading-tight">
-        <p className="text-sm font-bold tracking-wide text-white">Atlas Apparel</p>
+        <p className="text-sm font-bold tracking-wide text-white">Atlas reteke</p>
         <p className="text-xs font-medium text-navy-200">Wholesale CRM</p>
       </div>
     </div>
